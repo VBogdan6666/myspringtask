@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MainPage</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+    <div style="text-align: right">
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-sm">log out</button>
+        </form>
+    </div>
+    <div class="container">
+        <form th:object="${carModel}" th:method="put" th:action="@{/editCarModel}">
+            <label class="label" for="name">Edit Model Username: </label>
+            <input type="text" class="form-control" name="name" id="name" th:field="*{name}" required>
+            <label class="label" for="brand">Edit Model Username: </label>
+            <select class="form-control" th:field="*{brand}">
+                <option th:each="brand :${brands}" th:text="${brand.name}" th:value="${brand.id}" id="brand"></option>
+            </select>
+            <input type="hidden" th:field="*{id}">
+            <div style="text-align: right" class="pt-2">
+                <a class="btn btn-sm btn-light" th:href="@{/}">Cancel</a>
+                <button class="btn btn-sm btn-success ml-1" type="submit">Edit Car</button>
+            </div>
+
+        </form>
+    </div>
+</body>
+</html>

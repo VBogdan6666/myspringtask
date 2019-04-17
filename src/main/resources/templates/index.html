@@ -6,6 +6,49 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 </head>
 <body>
-    MainPage
+    <div style="text-align: right">
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-sm">log out</button>
+        </form>
+    </div>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Car model</th>
+                    <th>Brand</th>
+                    <th>Action</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="car :${cars}">
+                    <td th:text="${car.name}"></td>
+                    <td th:text="${car.brand.name}"></td>
+                    <td><a th:href="@{/editCarModel/{id}(id = ${car.id})}">edit</a></td>
+                    <td>
+                        <form th:method="delete" th:action="@{/delCarModel/{id}(id = ${car.getId()})}">
+                            <button class="btn btn-sm btn-danger" type="submit">&times;</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <form th:action="@{/addCarModel}" method="post" th:object="${carModel}">
+                        <td>
+                            <input type="text" class="form-control" name="name" id="name" th:field="*{name}" required>
+                        </td>
+                        <td>
+                            <select class="form-control" th:field="*{brand}">
+                                <option th:each="brand :${brands}" th:text="${brand.name}" th:value="${brand.id}"></option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-success" type="submit">Add Car</button>
+                        </td>
+                    </form>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
