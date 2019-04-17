@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rest page</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jquery-3.4.0.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Car model</th>
+            <th>Brand</th>
+            <th>Action</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody id="tbodyCarModel"></tbody>
+    </table>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: 'GET',
+            url: "/rest/indexData",
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                var rows = '';
+                data.forEach(function (obj) {
+                    rows += '<tr>' +
+                                '<td>' + obj.name + '</td>' +
+                                '<td>' + obj.brand.name + '</td>' +
+                                '<td>' + '<a href="#">edit</a>' + '</td>' +
+                                '<td>' + '<button class="btn btn-sm btn-danger" type="submit">&times;</button>'+ '</td>' +
+                            '</tr>';
+                });
+                $('#tbodyCarModel').html(rows);
+            }
+        });
+    });
+
+</script>
+</body>
+</html>
