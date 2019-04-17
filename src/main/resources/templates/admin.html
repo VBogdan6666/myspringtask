@@ -6,10 +6,26 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 </head>
 <body>
+<div style="text-align: right">
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn btn-sm">log out</button>
+    </form>
+</div>
 <div class="container pt-3">
-    <form>
-        <label class="label" for="username">Enter Username: </label>
-        <input type="text" class="form-control" name="username" id="username" >
+    <form th:action="@{/admin}" method="post" th:object="${user}">
+        <label class="label" for="name">Enter Username: </label>
+        <input type="text" class="form-control" name="name" id="name" th:field="*{name}" required>
+        <label class="label" for="password">Enter Password: </label>
+        <input type="text" class="form-control" name="password" id="password" th:field="*{password}" required>
+        <div class="mt-1">
+            <div class="form-check form-check-inline" th:each="role : ${roles}">
+                <input class="form-check-input" type="checkbox" th:value="${role.id}" th:field="*{roles}">
+                <label class="form-check-label" th:text="${#strings.capitalize(#strings.toLowerCase(role.name))}"></label>
+            </div>
+        </div>
+        <div style="text-align: right">
+            <button type="submit" class="btn btn-primary">Add Account</button>
+        </div>
     </form>
 </div>
 </body>

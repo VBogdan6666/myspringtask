@@ -1,15 +1,17 @@
 package com.bogdan.myspringtask.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "roles")
-public class Role extends BaseEntity{
+@Table(name = "Brand")
+public class Brand extends BaseEntity {
 
-    @Column(name = "name")
+    @Column(name ="name")
     private String name;
 
-    public Role() {
+    public Brand() {
     }
 
     public String getName() {
@@ -22,7 +24,7 @@ public class Role extends BaseEntity{
 
     @Override
     public String toString() {
-        return "Role{" +
+        return "Brand{" +
                 "name='" + name + '\'' +
                 '}';
     }
