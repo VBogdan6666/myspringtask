@@ -1,16 +1,14 @@
 package com.bogdan.myspringtask.controller;
 
-import com.bogdan.myspringtask.entity.Brand;
 import com.bogdan.myspringtask.entity.CarModel;
-import com.bogdan.myspringtask.repository.BrandRepository;
 import com.bogdan.myspringtask.service.BrandService;
 import com.bogdan.myspringtask.service.CarModelService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class RestController {
@@ -28,7 +26,30 @@ public class RestController {
 
     @GetMapping("/rest/indexData")
     @ResponseBody
-    public List<CarModel> showTable(){
-        return carModelService.findAllCars();
+    public ObjectNode showTable(){
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode objectNode = mapper.createObjectNode();
+        objectNode.putPOJO("cars",carModelService.findAllCars());
+        objectNode.putPOJO("brands",brandService.findAllBrands());
+        return objectNode;
     }
+
+    @DeleteMapping("/rest/delCarModel/{id}")
+    @ResponseBody
+    public void deleteUser(@PathVariable("id") Long id) {
+        carModelService.delCarModel(id);
+    }
+
+    @PostMapping("/rest/addCarModel")
+    @ResponseBody
+    public void addCarModel(@RequestBody CarModel carModel) {
+        carModelService.addNewOrEditCarModel(carModel);
+    }
+
+    @PutMapping("/rest/editCarModel")
+    @ResponseBody
+    public void editCarModel(@RequestBody CarModel carModel) {
+        carModelService.addNewOrEditCarModel(carModel);
+    }
+
 }

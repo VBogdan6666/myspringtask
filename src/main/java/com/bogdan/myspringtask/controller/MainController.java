@@ -35,7 +35,7 @@ public class MainController {
     }
 
     @DeleteMapping("/delCarModel/{id}")
-    public String deleteUser(@PathVariable("id") Long id) {
+    public String deleteCarModel(@PathVariable("id") Long id) {
         carModelService.delCarModel(id);
         return "redirect:/";
     }
