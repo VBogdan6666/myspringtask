@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" monitorInterval="30">
+    <Properties>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- %-40.40c{1.} : %m%n%ex</Property>
+        <Property name="APP_LOG_ROOT">d:/Proj/new/myspringtask/logs</Property>
+    </Properties>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+        <RollingFile name="myspringtaskErrorLog" fileName="${APP_LOG_ROOT}/myspringtaskError.log"
+                     filePattern="${APP_LOG_ROOT}/myspringtaskError-%d{yyyy-MM-dd}-%i.log">
+          <LevelRangeFilter minLevel="FATAL" maxLevel="ERROR"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="20KB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+        <RollingFile name="myspringtaskInfoLog" fileName="${APP_LOG_ROOT}/myspringtaskInfo.log"
+                     filePattern="${APP_LOG_ROOT}/myspringtaskInfo-%d{yyyy-MM-dd}-%i.log">
+            <LevelRangeFilter minLevel="WARN" maxLevel="INFO"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="20KB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.bogdan.myspringtask" level="debug" additivity="false">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="myspringtaskErrorLog" />
+            <AppenderRef ref="myspringtaskInfoLog" />
+        </Logger>
+
+        <Root level="info">
+            <AppenderRef ref="console" />
+        </Root>
+    </Loggers>
+</Configuration>
