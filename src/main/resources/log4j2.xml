@@ -2,7 +2,7 @@
 <Configuration status="INFO" monitorInterval="30">
     <Properties>
         <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- %-40.40c{1.} : %m%n%ex</Property>
-        <Property name="APP_LOG_ROOT">d:/Proj/new/myspringtask/logs</Property>
+        <Property name="APP_LOG_ROOT">D:\Proj\new\myspringtask\logs</Property>
     </Properties>
     <Appenders>
         <Console name="console" target="SYSTEM_OUT" follow="true">

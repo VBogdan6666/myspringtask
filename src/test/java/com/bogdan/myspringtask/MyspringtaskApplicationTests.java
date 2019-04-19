@@ -15,11 +15,14 @@ public class MyspringtaskApplicationTests {
 
     @Test
     public void log4j2Test() {
-        logger.debug("Debug Log Test");
-        logger.info("Info Log Test");
-        logger.warn("Warn Log Test");
-        logger.error("Error Log Test");
-        logger.fatal("Fatal Log Test");
+        for (int i = 0; i < 200; i++ ){
+            logger.debug("Debug Log Test");
+            logger.info("Info Log Test");
+            logger.warn("Warn Log Test");
+            logger.error("Error Log Test");
+            logger.fatal("Fatal Log Test");
+        }
+
     }
 
 }
