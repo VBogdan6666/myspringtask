@@ -2,6 +2,7 @@ package com.bogdan.myspringtask.service.Impl;
 
 import com.bogdan.myspringtask.entity.Role;
 import com.bogdan.myspringtask.entity.User;
+import com.bogdan.myspringtask.exception.MyException;
 import com.bogdan.myspringtask.repository.UserRepository;
 import com.bogdan.myspringtask.service.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -46,20 +47,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean addUser(User user) {
+    public void addUser(User user) throws MyException {
         if (user.getName() != null && user.getPassword() != null && !user.getRoles().isEmpty()) {
             if (userRepository.findByName(user.getName()) == null) {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
                 userRepository.save(user);
             } else {
                 logger.error("name: \"" + user.getName() + "\" is already taken.");
-                return false;
+                throw new MyException("name: \"" + user.getName() + "\" is already taken.");
             }
         } else {
             logger.warn("not all fields are filled");
+            throw new MyException("not all fields are filled");
         }
-
-        return true;
     }
 
 
