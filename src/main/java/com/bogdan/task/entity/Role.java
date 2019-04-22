@@ -13,9 +13,6 @@ public class Role{
     @Column(name = "name")
     private String name;
 
-    public Role() {
-    }
-
     public Long getId() {
         return id;
     }

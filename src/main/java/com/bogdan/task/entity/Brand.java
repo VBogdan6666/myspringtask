@@ -13,9 +13,6 @@ public class Brand{
     @Column(name ="name")
     private String name;
 
-    public Brand() {
-    }
-
     public Long getId() {
         return id;
     }

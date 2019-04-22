@@ -13,6 +13,7 @@ import java.util.Optional;
 @Controller
 public class MainController {
 
+   private static final String REDIRECT="redirect:/";
 
     @Autowired
     private CarModelService carModelService;
@@ -22,7 +23,7 @@ public class MainController {
 
     @GetMapping("/")
     public String showMainPage(Model model) {
-        //System.out.println(SecurityContextHolder.getContext().getAuthentication());
+
         model.addAttribute("cars", carModelService.findAllCars());
         model.addAttribute("carModel", new CarModel());
         model.addAttribute("brands", brandService.findAllBrands());
@@ -32,13 +33,13 @@ public class MainController {
     @PostMapping("/addCarModel")
     public String addNewCarModel(CarModel carModel) {
         carModelService.addNewOrEditCarModel(carModel);
-        return "redirect:/";
+        return REDIRECT;
     }
 
     @DeleteMapping("/delCarModel/{id}")
     public String deleteCarModel(@PathVariable("id") Long id) {
         carModelService.delCarModel(id);
-        return "redirect:/";
+        return REDIRECT;
     }
 
     @GetMapping("/editCarModel/{id}")
@@ -48,15 +49,15 @@ public class MainController {
         if(carModel.isPresent()){
             model.addAttribute("carModel", carModel);
             model.addAttribute("brands", brandService.findAllBrands());
-            return "editCarModelForm";
+            return "car-model-edit";
         }else {
-            return "redirect:/";
+            return REDIRECT;
         }
     }
 
     @PutMapping("/editCarModel")
     public String editCarModel(CarModel carModel){
         carModelService.addNewOrEditCarModel(carModel);
-        return "redirect:/";
+        return REDIRECT;
     }
 }

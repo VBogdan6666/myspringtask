@@ -19,7 +19,7 @@ public class RestController {
     private CarModelService carModelService;
 
     @GetMapping("/rest")
-    public String restIndex(){
+    public String showRestPage(){
         return "rest";
     }
 

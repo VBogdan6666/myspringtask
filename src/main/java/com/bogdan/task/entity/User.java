@@ -24,9 +24,6 @@ public class User{
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
 
-    public User() {
-    }
-
     public Long getId() {
         return id;
     }

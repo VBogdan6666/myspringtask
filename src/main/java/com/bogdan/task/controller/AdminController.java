@@ -38,12 +38,11 @@ public class AdminController {
             userService.addUser(user);
             model.addAttribute("statusMessage","user \""+user.getName()+"\" successfully added");
         } catch (MyException e) {
-           e.printStackTrace();
            logger.error(e.getMessage());
            model.addAttribute("statusMessage",e.getMessage());
 
         }
-        return "userStatusForm";
+        return "user-status-form";
     }
 
 

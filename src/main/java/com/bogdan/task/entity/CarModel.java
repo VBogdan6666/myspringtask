@@ -17,9 +17,6 @@ public class CarModel{
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
-    public CarModel() {
-    }
-
     public Long getId() {
         return id;
     }
