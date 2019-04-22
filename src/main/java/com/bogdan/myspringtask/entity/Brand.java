@@ -1,17 +1,27 @@
 package com.bogdan.myspringtask.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "brands")
-public class Brand extends BaseEntity {
+public class Brand{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name ="name")
     private String name;
 
     public Brand() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -25,7 +35,8 @@ public class Brand extends BaseEntity {
     @Override
     public String toString() {
         return "Brand{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

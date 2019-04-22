@@ -2,12 +2,15 @@ package com.bogdan.myspringtask.entity;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity{
+public class User{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -22,6 +25,14 @@ public class User extends BaseEntity{
     private Set<Role> roles = new HashSet<>();
 
     public User() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -48,10 +59,12 @@ public class User extends BaseEntity{
         this.roles = roles;
     }
 
+
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
                 '}';
