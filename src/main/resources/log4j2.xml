@@ -28,7 +28,7 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Logger name="com.bogdan.myspringtask" level="debug" additivity="false">
+        <Logger name="com.bogdan.task" level="debug" additivity="false">
             <AppenderRef ref="console" />
             <AppenderRef ref="myspringtaskErrorLog" />
             <AppenderRef ref="myspringtaskInfoLog" />
