@@ -9,9 +9,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MyspringtaskApplicationTests {
+public class MySpringTaskApplicationTests {
 
-    private static final Logger logger = LogManager.getLogger(MyspringtaskApplicationTests.class);
+    private static final Logger logger = LogManager.getLogger(MySpringTaskApplicationTests.class);
 
     @Test
     public void log4j2Test() {
