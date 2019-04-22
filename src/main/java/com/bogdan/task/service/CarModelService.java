@@ -3,6 +3,7 @@ package com.bogdan.task.service;
 import com.bogdan.task.entity.CarModel;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CarModelService {
 
@@ -12,6 +13,6 @@ public interface CarModelService {
 
     void delCarModel(Long id);
 
-    CarModel findCarModel(Long id);
+    Optional<CarModel> findCarModel(Long id);
 
 }

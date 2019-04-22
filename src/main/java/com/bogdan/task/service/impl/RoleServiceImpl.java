@@ -13,8 +13,11 @@ import java.util.List;
 @Transactional
 public class RoleServiceImpl implements RoleService {
 
+    private final RoleRepository roleRepository;
     @Autowired
-    private RoleRepository roleRepository;
+    public RoleServiceImpl(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
 
     @Override
     public List<Role> findAllRoles(){

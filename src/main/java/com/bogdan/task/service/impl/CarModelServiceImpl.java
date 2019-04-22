@@ -14,8 +14,12 @@ import java.util.Optional;
 @Transactional
 public class CarModelServiceImpl implements CarModelService {
 
+    private final CarModelRepository carModelRepository;
+
     @Autowired
-    private CarModelRepository carModelRepository;
+    public CarModelServiceImpl(CarModelRepository carModelRepository) {
+        this.carModelRepository = carModelRepository;
+    }
 
     @Override
     public List<CarModel> findAllCars(){
@@ -33,9 +37,8 @@ public class CarModelServiceImpl implements CarModelService {
     }
 
     @Override
-    public CarModel findCarModel(Long id){
-        Optional<CarModel> carModelOptional=carModelRepository.findById(id);
-        return carModelOptional.orElse(null);
+    public Optional<CarModel> findCarModel(Long id){
+        return carModelRepository.findById(id);
     }
 
 

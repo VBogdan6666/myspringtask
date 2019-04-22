@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @Controller
 public class MainController {
 
@@ -42,8 +44,8 @@ public class MainController {
     @GetMapping("/editCarModel/{id}")
     public String showEditPage(Model model,
                                @PathVariable("id") Long id) {
-        CarModel carModel = carModelService.findCarModel(id);
-        if(carModel != null){
+        Optional<CarModel> carModel = carModelService.findCarModel(id);
+        if(carModel.isPresent()){
             model.addAttribute("carModel", carModel);
             model.addAttribute("brands", brandService.findAllBrands());
             return "editCarModelForm";

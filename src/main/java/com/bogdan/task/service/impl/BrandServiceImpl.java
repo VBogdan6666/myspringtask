@@ -13,8 +13,11 @@ import java.util.List;
 @Transactional
 public class BrandServiceImpl implements BrandService {
 
+    private final BrandRepository brandRepository;
     @Autowired
-    private BrandRepository brandRepository;
+    public BrandServiceImpl(BrandRepository brandRepository) {
+        this.brandRepository = brandRepository;
+    }
 
     @Override
     public List<Brand> findAllBrands(){
