@@ -1,3 +1,5 @@
+$(document).ready(loadPage());
+
 function addCarModel() {
     var json = {};
     var brand = {};
@@ -68,8 +70,6 @@ function loadPage() {
 
             $('#tbodyCarModel').html(rows);
             $('#editBrand').html(brandOption);
-
-
         }
     });
 }
@@ -104,7 +104,6 @@ function editCarModel() {
             $("#editName").val(null);
             $("#editBrand").val(null);
             loadPage();
-
         }
     });
 }
