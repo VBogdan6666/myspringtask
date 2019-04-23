@@ -28,7 +28,7 @@ public class RestController {
     public ObjectNode showTable(){
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode objectNode = mapper.createObjectNode();
-        objectNode.putPOJO("cars",carModelService.findAllCars());
+        objectNode.putPOJO("cars",carModelService.findAllCarModels());
         objectNode.putPOJO("brands",brandService.findAllBrands());
         return objectNode;
     }

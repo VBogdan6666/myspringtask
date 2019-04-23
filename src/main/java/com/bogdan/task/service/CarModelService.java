@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface CarModelService {
 
-    List<CarModel> findAllCars();
+    List<CarModel> findAllCarModels();
 
     void addNewOrEditCarModel(CarModel carModel);
 

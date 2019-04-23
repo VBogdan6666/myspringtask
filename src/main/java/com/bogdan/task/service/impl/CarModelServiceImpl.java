@@ -22,18 +22,22 @@ public class CarModelServiceImpl implements CarModelService {
     }
 
     @Override
-    public List<CarModel> findAllCars(){
+    public List<CarModel> findAllCarModels(){
         return carModelRepository.findAll();
     }
 
     @Override
     public void addNewOrEditCarModel(CarModel carModel){
-        carModelRepository.save(carModel);
+        if(!carModel.getName().isEmpty() && carModel.getBrand().getId()!=null && !carModel.getBrand().getName().isEmpty()){
+            carModelRepository.save(carModel);
+        }
     }
 
     @Override
     public void delCarModel(Long id){
-        carModelRepository.deleteById(id);
+        if(findCarModel(id).isPresent()){
+            carModelRepository.deleteById(id);
+        }
     }
 
     @Override

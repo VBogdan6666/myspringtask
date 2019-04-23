@@ -24,7 +24,7 @@ public class MainController {
     @GetMapping("/")
     public String showMainPage(Model model) {
 
-        model.addAttribute("cars", carModelService.findAllCars());
+        model.addAttribute("cars", carModelService.findAllCarModels());
         model.addAttribute("carModel", new CarModel());
         model.addAttribute("brands", brandService.findAllBrands());
         return "index";
