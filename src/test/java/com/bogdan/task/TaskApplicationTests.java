@@ -123,14 +123,12 @@ public class TaskApplicationTests {
     @Test
     public void findAllBrandsTest() {
         Assert.assertNotNull(carModelService.findAllCarModels());
-        Assert.assertTrue(carModelService.findAllCarModels() instanceof List);
         Assert.assertEquals(brandRepository.findAll().size(), brandService.findAllBrands().size());
     }
 
     @Test
     public void findAllRolesTest() {
         Assert.assertNotNull(roleService.findAllRoles());
-        Assert.assertTrue(roleService.findAllRoles() instanceof List);
         Assert.assertEquals(roleRepository.findAll().size(), roleService.findAllRoles().size());
     }
 
@@ -182,7 +180,6 @@ public class TaskApplicationTests {
     @Test
     public void findAllCarModelsTest() {
         Assert.assertNotNull(roleService.findAllRoles());
-        Assert.assertTrue(roleService.findAllRoles() instanceof List);
         Assert.assertEquals(carModelRepository.findAll().size(), carModelService.findAllCarModels().size());
     }
 
@@ -196,7 +193,6 @@ public class TaskApplicationTests {
         carModel.setBrand(brand);
         carModelRepository.save(carModel);
 
-        Assert.assertTrue(carModelService.findCarModel(carModel.getId()) instanceof Optional);
         Optional<CarModel> findCarModel = carModelService.findCarModel(carModel.getId());
         Assert.assertTrue(findCarModel.isPresent());
         Assert.assertEquals("Test Find CarModel",findCarModel.get().getName());
