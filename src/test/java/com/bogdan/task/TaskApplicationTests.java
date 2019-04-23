@@ -18,7 +18,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -232,6 +231,7 @@ public class TaskApplicationTests {
         Assert.assertFalse(carModelRepository.findById(carModel.getId()).isPresent());
 
         carModelService.delCarModel(9999999999999L);
+        brandRepository.delete(brand);
 
         try{
             carModelService.delCarModel(null);
