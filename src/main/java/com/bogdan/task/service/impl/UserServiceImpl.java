@@ -5,6 +5,7 @@ import com.bogdan.task.entity.User;
 import com.bogdan.task.exception.MyException;
 import com.bogdan.task.repository.UserRepository;
 import com.bogdan.task.service.UserService;
+import com.bogdan.task.service.ValidationService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +26,17 @@ public class UserServiceImpl implements UserService {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final ValidationService validationService;
+
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, ValidationService validationService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.validationService = validationService;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username){
+    public UserDetails loadUserByUsername(String username) {
         User user = userRepository.findByName(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
@@ -49,12 +53,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addUser(User user) throws MyException {
         if (user.getName() != null && user.getPassword() != null && !user.getRoles().isEmpty()) {
-            if (userRepository.findByName(user.getName()) == null) {
-                user.setPassword(passwordEncoder.encode(user.getPassword()));
-                userRepository.save(user);
+            String username = user.getName().trim();
+            String password = user.getPassword().trim();
+            if (validationService.checkUsername(username) && validationService.checkPassword(password)) {
+                if (userRepository.findByName(username) == null) {
+                    user.setPassword(passwordEncoder.encode(password));
+                    userRepository.save(user);
+                } else {
+                    logger.error("name: \"" + username + "\" is already taken.");
+                    throw new MyException("name: \"" + username + "\" is already taken.");
+                }
             } else {
-                logger.error("name: \"" + user.getName() + "\" is already taken.");
-                throw new MyException("name: \"" + user.getName() + "\" is already taken.");
+                logger.warn("incorrect username or password");
+                throw new MyException("incorrect username or password");
             }
         } else {
             logger.warn("not all fields are filled");

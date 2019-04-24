@@ -9,10 +9,7 @@ import com.bogdan.task.repository.BrandRepository;
 import com.bogdan.task.repository.CarModelRepository;
 import com.bogdan.task.repository.RoleRepository;
 import com.bogdan.task.repository.UserRepository;
-import com.bogdan.task.service.BrandService;
-import com.bogdan.task.service.CarModelService;
-import com.bogdan.task.service.RoleService;
-import com.bogdan.task.service.UserService;
+import com.bogdan.task.service.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,6 +51,9 @@ public class TaskApplicationTests {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ValidationService validationService;
+
 
     @Test
     public void addUserTest() throws MyException {
@@ -85,7 +85,7 @@ public class TaskApplicationTests {
         }
 
         userRepository.delete(user);
-        roleRepository.delete(role);
+
 
         User userWithoutName = new User();
         userWithoutName.setPassword("Test");
@@ -117,6 +117,29 @@ public class TaskApplicationTests {
             Assert.assertEquals("not all fields are filled", e.getMessage());
         }
 
+        User userIncorrectUsername = new User();
+        userIncorrectUsername.setName("TestName Incorrect");
+        userIncorrectUsername.setPassword("Test");
+        userIncorrectUsername.setRoles(roles);
+        try {
+            userService.addUser(userIncorrectUsername);
+            Assert.fail("Expected MyException");
+        } catch (MyException e) {
+            Assert.assertEquals("incorrect username or password", e.getMessage());
+        }
+
+        User userIncorrectPassword = new User();
+        userIncorrectPassword.setName("TestName");
+        userIncorrectPassword.setPassword("Test Incorrect");
+        userIncorrectPassword.setRoles(roles);
+        try {
+            userService.addUser(userIncorrectPassword);
+            Assert.fail("Expected MyException");
+        } catch (MyException e) {
+            Assert.assertEquals("incorrect username or password", e.getMessage());
+        }
+
+        roleRepository.delete(role);
     }
 
     @Test
@@ -236,6 +259,33 @@ public class TaskApplicationTests {
         }
 
     }
+
+    @Test
+    public void checkUsernameTest(){
+        Assert.assertFalse(validationService.checkUsername("Тестqwe"));
+        Assert.assertFalse(validationService.checkUsername("ab"));
+        Assert.assertTrue(validationService.checkUsername("abcD"));
+        Assert.assertFalse(validationService.checkUsername("abcD_"));
+        Assert.assertFalse(validationService.checkUsername("abcD__"));
+        Assert.assertTrue(validationService.checkUsername("abcD_e"));
+        Assert.assertTrue(validationService.checkUsername("abcD-e"));
+        Assert.assertFalse(validationService.checkUsername("abcD_-e"));
+        Assert.assertFalse(validationService.checkUsername("abcD-e?"));
+        Assert.assertFalse(validationService.checkUsername("abcD e"));
+    }
+
+    @Test
+    public void checkPasswordTest(){
+        Assert.assertFalse(validationService.checkPassword("Тест"));
+        Assert.assertFalse(validationService.checkPassword("ab"));
+        Assert.assertTrue(validationService.checkPassword("abc"));
+        Assert.assertTrue(validationService.checkPassword("ab_cd"));
+        Assert.assertFalse(validationService.checkPassword("ab cd"));
+
+    }
+
+
+
 //    @Test
 //    public void testAddFindEditDeleteCarModel() {
 //        Brand brand = new Brand();
