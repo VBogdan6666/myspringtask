@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Rest page</title>
+    <title th:text="#{rest.title}"></title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/js/jquery-3.4.0.min.js}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -14,15 +14,24 @@
     <form th:action="@{/logout}" method="post">
         <button type="submit" class="btn btn-sm">log out</button>
     </form>
+    <p class="pr-2">
+        <a th:href="@{/rest(language=en_US)}">
+            <span>en</span>
+        </a>
+        <span>/</span>
+        <a th:href="@{/rest(language=ru_RU)}">
+            <span>ru</span>
+        </a>
+    </p>
     <a href="/">Version without JS</a>
 </div>
 <div class="container">
     <table class="table">
         <thead>
         <tr>
-            <th>Car model</th>
-            <th>Brand</th>
-            <th>Action</th>
+            <th th:text="#{car.model}"></th>
+            <th th:text="#{brand}"></th>
+            <th th:text="#{action}"></th>
             <th></th>
         </tr>
         </thead>
@@ -30,6 +39,7 @@
 
         </tbody>
     </table>
+
 </div>
 <div class="modal fade" id="editCarModelModal" tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog">

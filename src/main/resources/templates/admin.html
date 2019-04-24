@@ -10,12 +10,21 @@
         <form th:action="@{/logout}" method="post">
             <button type="submit" class="btn btn-sm">log out</button>
         </form>
+        <p class="pr-2">
+            <a th:href="@{/admin(language=en_US)}">
+                <span>en</span>
+            </a>
+            <span>/</span>
+            <a th:href="@{/admin(language=ru_RU)}">
+                <span>ru</span>
+            </a>
+        </p>
     </div>
     <div class="container pt-3">
         <form th:action="@{/admin}" method="post" th:object="${user}">
-            <label class="label" for="name">Enter Username: </label>
+            <label class="label" for="name" th:text="#{enter.username}"></label>
             <input type="text" class="form-control" maxlength="50" name="name" id="name" th:field="*{name}" required>
-            <label class="label" for="password">Enter Password: </label>
+            <label class="label" for="password" th:text="#{enter.password}"></label>
             <input type="text" class="form-control" maxlength="254" name="password" id="password" th:field="*{password}" required>
             <div class="mt-1">
                 <div class="form-check form-check-inline" th:each="role : ${roles}">
@@ -24,7 +33,8 @@
                 </div>
             </div>
             <div style="text-align: right">
-                <button type="submit" class="btn btn-primary">Add Account</button>
+                <a class="btn btn-sm btn-light" th:href="@{/}" th:text="#{cancel}"></a>
+                <button type="submit" class="btn btn-primary" th:text="#{add}"></button>
             </div>
         </form>
     </div>

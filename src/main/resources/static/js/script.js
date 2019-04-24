@@ -43,6 +43,8 @@ function loadPage() {
         success: function (data) {
             var cars = data.cars;
             var brands = data.brands;
+            var editName = data.edit;
+            var addName = data.addLoc;
             var rows = '';
             var brandOption = '';
             brands.forEach(function (obj) {
@@ -52,8 +54,8 @@ function loadPage() {
                 rows += '<tr>' +
                     '<td>' + obj.name + '</td>' +
                     '<td>' + obj.brand.name + '</td>' +
-                    '<td>' + '<button type="button" class="btn btn-sm" id="qwer" data-toggle="modal"' +
-                    ' data-target="#editCarModelModal" onclick="editCarModelData(\''+obj.name+'\',\''+obj.brand.id+'\',\''+obj.id+'\')">edit</button>' + '</td>' +
+                    '<td>' + '<button type="button" class="btn btn-sm edit-button" id="qwer" data-toggle="modal"' +
+                    ' data-target="#editCarModelModal" onclick="editCarModelData(\''+obj.name+'\',\''+obj.brand.id+'\',\''+obj.id+'\')">'+editName+'</button>' + '</td>' +
                     '<td>' + '<button class="btn btn-sm btn-danger" type="submit" onclick="delCarModel(' + obj.id + ')">&times;</button>' + '</td>' +
                     '</tr>';
             });
@@ -64,13 +66,14 @@ function loadPage() {
             rows += '</select>' +
                 '</td>' +
                 '<td>' +
-                '<button class="btn btn-sm btn-success" type="button" onclick="addCarModel()">Add Car</button>' +
+                '<button class="btn btn-sm btn-success" type="button" onclick="addCarModel()" th:text="#{add}">'+addName+'</button>' +
                 '</td>' +
                 '</tr>';
 
             $('#tbodyCarModel').html(rows);
             $('#editBrand').html(brandOption);
         }
+
     });
 }
 
