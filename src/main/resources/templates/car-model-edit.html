@@ -11,18 +11,19 @@
             <button type="submit" class="btn btn-sm">log out</button>
         </form>
     </div>
+
     <div class="container">
-        <form th:object="${carModel}" th:method="put" th:action="@{/editCarModel}">
-            <label class="label" for="name">Edit Model Username: </label>
+        <form  th:method="put" th:action="@{/edit-car-model}" th:object="${carModel}">
+            <label class="label" for="name" th:text="#{car.model}"></label>
             <input type="text" class="form-control" name="name" id="name" th:field="*{name}" required>
-            <label class="label" for="brand">Edit Model Username: </label>
+            <label class="label" for="brand" th:text="#{brand}"></label>
             <select class="form-control" th:field="*{brand}">
                 <option th:each="brand :${brands}" th:text="${brand.name}" th:value="${brand.id}" id="brand"></option>
             </select>
             <input type="hidden" th:field="*{id}">
             <div style="text-align: right" class="pt-2">
-                <a class="btn btn-sm btn-light" th:href="@{/}">Cancel</a>
-                <button class="btn btn-sm btn-success ml-1" type="submit">Edit Car</button>
+                <a class="btn btn-sm btn-light" th:href="@{/}" th:text="#{cancel}"></a>
+                <button class="btn btn-sm btn-success ml-1" type="submit" th:text="#{edit}"></button>
             </div>
 
         </form>

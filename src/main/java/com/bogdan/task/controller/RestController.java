@@ -23,7 +23,7 @@ public class RestController {
         return "rest";
     }
 
-    @GetMapping("/rest/indexData")
+    @GetMapping("/rest/index-data")
     @ResponseBody
     public ObjectNode showTable(){
         ObjectMapper mapper = new ObjectMapper();
@@ -33,19 +33,19 @@ public class RestController {
         return objectNode;
     }
 
-    @DeleteMapping("/rest/delCarModel/{id}")
+    @DeleteMapping("/rest/del-car-model/{id}")
     @ResponseBody
     public void deleteUser(@PathVariable("id") Long id) {
         carModelService.delCarModel(id);
     }
 
-    @PostMapping("/rest/addCarModel")
+    @PostMapping("/rest/add-car-model")
     @ResponseBody
     public void addCarModel(@RequestBody CarModel carModel) {
         carModelService.addNewOrEditCarModel(carModel);
     }
 
-    @PutMapping("/rest/editCarModel")
+    @PutMapping("/rest/edit-car-model")
     @ResponseBody
     public void editCarModel(@RequestBody CarModel carModel) {
         carModelService.addNewOrEditCarModel(carModel);

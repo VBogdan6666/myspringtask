@@ -1,14 +1,14 @@
 
 create table brands(
     id   bigint(20) not null auto_increment,
-    name varchar(255),
+    name varchar(75),
     primary key (id)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
 create table car_models(
     id       bigint(20) not null auto_increment,
-    name     varchar(255),
+    name     varchar(75),
     brand_id bigint(20),
     primary key (id)
 ) ENGINE = InnoDB
@@ -16,14 +16,14 @@ create table car_models(
 
 create table roles(
     id   bigint(20) not null auto_increment,
-    name varchar(255),
+    name varchar(30),
     primary key (id)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
 create table users(
     id       bigint(20) not null auto_increment,
-    name     varchar(255),
+    name     varchar(50),
     password varchar(255),
     primary key (id)
 ) ENGINE = InnoDB

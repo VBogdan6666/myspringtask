@@ -10,7 +10,7 @@ function addCarModel() {
 
     $.ajax({
         type: 'POST',
-        url: '/rest/addCarModel/',
+        url: '/rest/add-car-model/',
         //dataType: 'json',
         contentType: 'application/json',
         data: JSON.stringify(json),
@@ -28,7 +28,7 @@ function delCarModel(id) {
 
     $.ajax({
         type: 'DELETE',
-        url: '/rest/delCarModel/' + id,
+        url: '/rest/del-car-model/' + id,
         success: function () {
             loadPage();
         }
@@ -38,7 +38,7 @@ function delCarModel(id) {
 function loadPage() {
     $.ajax({
         type: 'GET',
-        url: "/rest/indexData",
+        url: "/rest/index-data",
         contentType: 'application/json; charset=utf-8',
         success: function (data) {
             var cars = data.cars;
@@ -58,7 +58,7 @@ function loadPage() {
                     '</tr>';
             });
             rows += '<tr>' +
-                '<td><input type="text" class="form-control" name="name" id="name"></td>' +
+                '<td><input type="text" maxlength="75" class="form-control" name="name" id="name"></td>' +
                 '<td><select class="form-control" id="brand">';
             rows += brandOption;
             rows += '</select>' +
@@ -91,7 +91,7 @@ function editCarModel() {
 
     $.ajax({
         type: 'PUT',
-        url: '/rest/editCarModel/',
+        url: '/rest/edit-car-model/',
         //dataType: 'json',
         contentType: 'application/json',
         data: JSON.stringify(json),
